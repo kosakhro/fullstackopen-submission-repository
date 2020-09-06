@@ -15,11 +15,15 @@ const Header = (props) => {
   return <h1>{props.course}</h1>
 }
 
-const Total = (props) => (
+const Total = (props) => {
+  console.log('Total: ', props)
+  return (
   <div>
     <p>total number of exercises: {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
   </div>
-)
+  )
+}
+
 const Content = (props) => { 
   console.log('Content: ', props)
   return (
