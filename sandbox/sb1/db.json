@@ -1,0 +1,100 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "content": "HTML is easy",
+      "date": "2019-05-30T17:30:31.098Z",
+      "important": false
+    },
+    {
+      "id": 2,
+      "content": "Browser can execute only JavaScript",
+      "date": "2019-05-30T18:39:34.091Z",
+      "important": false
+    },
+    {
+      "id": 3,
+      "content": "GET and POST are the most important methods of HTTP protocol",
+      "date": "2019-05-30T19:20:14.298Z",
+      "important": true
+    },
+    {
+      "content": "new note",
+      "date": "2020-12-02T20:05:14.219Z",
+      "important": true,
+      "id": 4
+    },
+    {
+      "content": "mk",
+      "date": "2020-12-02T20:05:19.169Z",
+      "important": true,
+      "id": 5
+    },
+    {
+      "content": "mm",
+      "date": "2020-12-02T20:05:37.695Z",
+      "important": true,
+      "id": 6
+    },
+    {
+      "content": "oo",
+      "date": "2020-12-02T20:05:41.335Z",
+      "important": true,
+      "id": 7
+    },
+    {
+      "content": "new note",
+      "date": "2020-12-02T21:03:02.738Z",
+      "important": true,
+      "id": 8
+    },
+    {
+      "content": "new note",
+      "date": "2020-12-02T21:03:07.398Z",
+      "important": false,
+      "id": 9
+    },
+    {
+      "content": "new note",
+      "date": "2020-12-03T09:50:02.001Z",
+      "important": false,
+      "id": 10
+    },
+    {
+      "content": "new note",
+      "date": "2020-12-03T09:51:03.944Z",
+      "important": false,
+      "id": 11
+    },
+    {
+      "content": "nn",
+      "date": "2020-12-03T09:51:07.798Z",
+      "important": false,
+      "id": 12
+    },
+    {
+      "content": "new note",
+      "date": "2020-12-03T10:49:53.876Z",
+      "important": false,
+      "id": 13
+    },
+    {
+      "content": "new note",
+      "date": "2020-12-03T11:00:11.109Z",
+      "important": false,
+      "id": 14
+    },
+    {
+      "content": "new note",
+      "date": "2020-12-03T11:04:34.526Z",
+      "important": true,
+      "id": 15
+    },
+    {
+      "content": "aS",
+      "date": "2020-12-03T11:18:27.028Z",
+      "important": true,
+      "id": 17
+    }
+  ]
+}

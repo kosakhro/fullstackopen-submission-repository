@@ -1,9 +1,15 @@
 import React from 'react'
 
 
-const Contact = ({contact}) => {
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
+
+const Contact = ({contact, onClick}) => {
     return (
-        <div>{contact.name} {contact.number}</div>
+        <div>{contact.name} {contact.number} <Button handleClick={() => onClick(contact.id)} text='delete' /></div>
     )
   }
 
