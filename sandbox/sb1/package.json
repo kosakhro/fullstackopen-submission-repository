@@ -7,6 +7,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.2.2",
     "axios": "^0.21.0",
+    "morgan": "^1.10.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
@@ -18,7 +19,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "json-server -p3010 --watch db.json"
-
   },
   "eslintConfig": {
     "extends": [
