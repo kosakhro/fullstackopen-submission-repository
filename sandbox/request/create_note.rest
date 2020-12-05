@@ -3,6 +3,6 @@ POST http://localhost:3005/api/notes/
 Content-Type: application/json
 
 {
-"content": "bjhhjkjk99988899kbk",
+"content": "lll",
 "important": true
 }
