@@ -1,8 +1,0 @@
-
-POST http://localhost:3005/api/notes/
-Content-Type: application/json
-
-{
-"content": "lll",
-"important": true
-}

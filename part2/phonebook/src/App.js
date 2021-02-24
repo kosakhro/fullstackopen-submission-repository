@@ -11,8 +11,8 @@ import Notification from './components/Notification'
 
 const App = () => {
   const [ persons, setPersons ] = useState([]) 
-  const [ newName, setNewName ] = useState('njkj')
-  const [ newNumber, setNewNumber ] = useState('123')
+  const [ newName, setNewName ] = useState('')
+  const [ newNumber, setNewNumber ] = useState('')
   const [searchValue, setSearchValue] = useState('')
   const [changeMessage, setChangeMessage] = useState(null)
 
@@ -41,9 +41,22 @@ const App = () => {
       .create(personObject)
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
-      })
+        setChangeMessage(`Added .${newName}.`)
+      setTimeout(() => {
+        setChangeMessage(null)
+      }, 5000)
       setNewName('')
       setNewNumber('')
+      })
+      
+      
+      .catch(error => {
+        console.log(error.response.data)
+        setChangeMessage(error.response.data.error)
+      setTimeout(() => {
+        setChangeMessage(null)
+      }, 5000)
+      })
     }
     else if (window.confirm(`${newName} is already added to phonebook, replace the phone number with new one?`)){
       const person = persons.find(n => n.name === newName)
@@ -66,10 +79,7 @@ const App = () => {
 
     }
 
-    setChangeMessage(`Added ..`)
-    setTimeout(() => {
-      setChangeMessage(null)
-    }, 5000)
+
 
   }
 
