@@ -1,0 +1,13 @@
+PUT http://localhost:3003/api/blogs/603d33c57e521b0e665c341d
+Content-Type: application/json
+
+{
+  "title": "Buratino",
+  "author": "Aleksey Tolstoi",
+  "url": "wwwleningradwww.ru",
+  "likes": 777
+}
+
+
+
+
