@@ -1,10 +1,2 @@
-POST http://localhost:3003/api/blogs 
-Content-Type: application/json 
+DELETE http://localhost:3003/api/blogs/62432c4df6507fce8790f42a
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9wcG96aXRvIiwiaWQiOiI2MjQzMjhhNGY2NTA3ZmNlODc5MGY0MTIiLCJpYXQiOjE2NDg1NzM3NDF9.mJbH8rN2P5j-NggDaB3YLc_JJ7aeHlRap1UhE-J0dYw
-
-{
-"url": "www.hs.fi", 
-"title": "Hesburger", 
-"author": "Maailma", 
-"likes": 0
-}

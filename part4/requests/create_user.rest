@@ -1,0 +1,11 @@
+POST http://localhost:3003/api/users 
+Content-Type: application/json
+
+{
+"username": "oppozito", 
+"name": "hfhjfjh", 
+"password": "123456"
+}
+
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9wcG96aXRvIiwiaWQiOiI2MjQzMjhhNGY2NTA3ZmNlODc5MGY0MTIiLCJpYXQiOjE2NDg1Njg1NDN9.f-2IJOQkIJLoPGrD4BvxFbBPAX4IRbvfF9klkFimg6Q
