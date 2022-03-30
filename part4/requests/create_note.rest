@@ -1,6 +1,6 @@
 POST http://localhost:3003/api/blogs 
 Content-Type: application/json 
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9wcG96aXRvIiwiaWQiOiI2MjQzMjhhNGY2NTA3ZmNlODc5MGY0MTIiLCJpYXQiOjE2NDg1NzM3NDF9.mJbH8rN2P5j-NggDaB3YLc_JJ7aeHlRap1UhE-J0dYw
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9wcG96aXRvIiwiaWQiOiI2MjQzNzA3MzZmYTRhM2Q1Y2IxNzcxYzMiLCJpYXQiOjE2NDg1ODY4OTB9.Y0U4y3dp5TgrpK5wwLnz9a3anJpauuUGmwQQAE5B3XM
 
 {
 "url": "www.hs.fi", 
