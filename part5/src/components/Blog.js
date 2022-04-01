@@ -28,10 +28,10 @@ const Blog = ({ blog, updateBlog, handleRemove, user }) => {
         {blog.title} {blog.author} <button onClick={() => setBlogView(true)}> view</button>
       </div>
     )}
-  console.log('blog user name: ', blog.user.name)
+  /*console.log('blog user name: ', blog.user.name)
   console.log('user name: ', user.name)
   console.log('user: ', user)
-  console.log('blog user : ', blog.user)
+  console.log('blog user : ', blog.user)*/
   if (blog.user.name === user.name)
   {
     return (
