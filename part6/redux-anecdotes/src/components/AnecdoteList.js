@@ -5,6 +5,8 @@ import { notificationChange } from "../reducers/notificationReducer";
 
 const AnecdoteList = () => {
   const anecdotes = useSelector((state) => {
+    //console.log(state.anecdotes)
+
     return state.anecdotes;
   });
   const dispatch = useDispatch()
