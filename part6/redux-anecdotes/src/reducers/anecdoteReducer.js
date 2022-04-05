@@ -7,22 +7,30 @@ const anecdotesAtStart = [
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
 
-const getId = () => (100000 * Math.random()).toFixed(0)
+const getId = () => (100000 * Math.random()).toFixed(0);
 
 const asObject = (anecdote) => {
   return {
     content: anecdote,
     id: getId(),
-    votes: 0
-  }
-}
+    votes: 0,
+  };
+};
 
-const initialState = anecdotesAtStart.map(asObject)
+const initialState = anecdotesAtStart.map(asObject);
 
-const reducer = (state = initialState, action) => {
+export const createAnecdote = (content) => {
+  return { type: "NEW_ANECDOTE", data: content };
+};
+export const voteAnecdote = (id) => {
+  return {     type: 'VOTE', data: { id } };
+};
+
+const anecdoteReducer = (state = initialState, action) => {
   switch (action.type) {
     case "VOTE":
-      const id = action.id;
+      console.log(action.data.id)
+      const id = action.data.id;
       const anecdote = state.find((a) => a.id === id);
       const updatedAnecdote = {
         ...anecdote,
@@ -36,4 +44,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer
+export default anecdoteReducer;
