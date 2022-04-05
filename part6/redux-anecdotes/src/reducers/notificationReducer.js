@@ -1,19 +1,17 @@
-const initialState = null
-
-const notificationReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case 'SET_NOTIFICATION':
-          return action.notification
-        default:
-          return state
-      }
-}
-
-export const notificationChange = notification => {
-  return {
-    type: 'SET_NOTIFICATION',
-    notification,
+export const notificationChange = (content,time) => {
+  return dispatch=>{
+    dispatch({type:'NEW_NOTIFICATION',data:content});
+    setTimeout(() => {
+      dispatch(dispatch({type:'NEW_NOTIFICATION',data:""}));
+    }, time*1000);
   }
-}
-
-export default notificationReducer
+};
+const notificationReducer = (state = "", action) => {
+  switch (action.type) {
+    case "NEW_NOTIFICATION":
+      return action.data;
+    default:
+      return state;
+  }
+};
+export default notificationReducer;

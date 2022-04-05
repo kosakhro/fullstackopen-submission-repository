@@ -32,10 +32,7 @@ const AnecdoteList = () => {
         <button onClick={() => {
           console.log(anecdote.id)
           dispatch(voteAnecdote(anecdote.id))   
-          dispatch(notificationChange(`Stop voting for stale jokes: '${anecdote.content}'`))
-          setTimeout(() => {
-            dispatch(notificationChange(null))
-          }, 5000)
+          dispatch(notificationChange(`Stop voting for stale jokes: '${anecdote.content}'`, 3))
         }
           }>vote</button>
             </div>
