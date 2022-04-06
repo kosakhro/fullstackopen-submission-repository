@@ -1,102 +1,42 @@
 import { useState } from 'react'
+import  useField  from './hooks/myHooks'
+import Menu from './components/Menu'
+import AnecdoteList from './components/AnecdoteList'
+import Anecdote from './components/Anecdote'
+import About from './components/About'
+import Footer from './components/Footer'
 
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
-  Navigate,
-  useParams,
-  useNavigate,
-  useMatch
+  useNavigate
 } from "react-router-dom"
 
-const Menu = () => {
-  const padding = {
-    paddingRight: 5
-  }
-  return (
-    <div>
-      <Link style={padding} to="/">anecdotes</Link>
-      <Link style={padding} to="/create">new anecdote</Link>
-      <Link style={padding} to="/about">about</Link>
-    </div>
-  )
-}
-
-const AnecdoteList = ({ anecdotes, notification }) => (
-  <div>
-    <h2>Anecdotes</h2>
-    <Notification notification={notification}/>
-    <ul>
-      {anecdotes.map((anecdote) => (
-        <li key={anecdote.id}>
-          <Link to={`/anecdotes/${anecdote.id}`}>{anecdote.content}</Link>
-        </li>
-      ))}
-    </ul>
-  </div>
-)
-
-const Anecdote = ({ anecdotes }) => {
-  const id = useParams().id;
-  const anecdote = anecdotes.find((a) => Number(a.id) === Number(id));
-  return (
-    <>
-      <h3>{anecdote.content}</h3>
-      <h3>has {anecdote.votes} votes</h3>
-    </>
-  )
-}
-
-const Notification = (props) => {
-
-  const style = {
-    border: "solid",
-    padding: 10,
-    borderWidth: 1,
-  };
-  return props.notification !== "" ? <div style={style}>{props.notification}</div> : <></>;
-};
-
-const About = () => (
-  <div>
-    <h2>About anecdote app</h2>
-    <p>According to Wikipedia:</p>
-
-    <em>An anecdote is a brief, revealing account of an individual person or an incident.
-      Occasionally humorous, anecdotes differ from jokes because their primary purpose is not simply to provoke laughter but to reveal a truth more general than the brief tale itself,
-      such as to characterize a person by delineating a specific quirk or trait, to communicate an abstract idea about a person, place, or thing through the concrete details of a short narrative.
-      An anecdote is "a story with a point."</em>
-
-    <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
-  </div>
-)
-
-const Footer = () => (
-  <div>
-    Anecdote app for <a href='https://fullstackopen.com/'>Full Stack Open</a>.
-
-    See <a href='https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js'>https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js</a> for the source code.
-  </div>
-)
 
 const CreateNew = (props) => {
-  const [content, setContent] = useState('')
-  const [author, setAuthor] = useState('')
-  const [info, setInfo] = useState('')
+  const content = useField('content')
+  const author = useField('author')
+  const info = useField('info')
   const navigate = useNavigate()
 
 
   const handleSubmit = (e) => {
     e.preventDefault()
     props.addNew({
-      content,
+      content:content.value,
       author,
       info,
       votes: 0
     })
     navigate('/')
+  }
+
+  const clear=(e)=>{
+    e.preventDefault();
+    content.reset();
+    author.reset();
+    info.reset();
   }
 
   return (
@@ -105,17 +45,18 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+          <input {...{...content, reset: null}} />
         </div>
         <div>
           author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
+          <input {...{...author, reset: null}} />
         </div>
         <div>
           url for more info
-          <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
+          <input {...{...info, reset: null}} />
         </div>
-        <button>create</button>
+        <button type='submit'>create</button>
+        <button type='reser' onClick={clear}>reset</button>
       </form>
     </div>
   )
@@ -153,7 +94,7 @@ const App = () => {
     }, 3000);
   }
 
-  const anecdoteById = (id) =>
+  /*const anecdoteById = (id) =>
     anecdotes.find(a => a.id === id)
 
   const vote = (id) => {
@@ -165,7 +106,7 @@ const App = () => {
     }
 
     setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
-  }
+  }*/
 
   return (
     
