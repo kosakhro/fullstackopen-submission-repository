@@ -6,6 +6,8 @@ import Anecdote from './components/Anecdote'
 import About from './components/About'
 import Footer from './components/Footer'
 
+
+
 import {
   BrowserRouter as Router,
   Routes,
