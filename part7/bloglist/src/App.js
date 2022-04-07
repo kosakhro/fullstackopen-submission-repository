@@ -6,14 +6,17 @@ import loginService from "./services/login";
 import LoginForm from "./components/LoginForm";
 import BlogForm from "./components/BlogForm";
 import Togglable from "./components/Togglable";
+import { useDispatch } from "react-redux";
+import { notificationChange } from "./reducers/notificationReducer";
 
 const App = () => {
+  const dispatch = useDispatch();
   const [blogs, setBlogs] = useState([]);
   //const [newBlog, setNewBlog] = useState('')
   //const [newAuthor, setNewAuthor] = useState('')
   //const [newUrl, setNewUrl] = useState('')
   //const [showAll, setShowAll] = useState(true)
-  const [errorMessage, setErrorMessage] = useState(null);
+  //const [errorMessage, setErrorMessage] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
@@ -45,10 +48,7 @@ const App = () => {
       setPassword("");
       setUser(user);
     } catch (exception) {
-      setErrorMessage("wrong credentials");
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
+      dispatch(notificationChange("Wrong credentials", 3));
     }
   };
 
@@ -56,28 +56,17 @@ const App = () => {
     console.log("logout");
     window.localStorage.removeItem("loggedBlogappUser");
     setUser(null);
-    setErrorMessage("You are successfully loged out");
-    setTimeout(() => {
-      setErrorMessage(null);
-    }, 5000);
+    dispatch(notificationChange("You are successfully loged out", 3));
   };
 
   const handleRemove = async (blog) => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
       try {
         await blogService.remove(blog.id);
-        setErrorMessage(`${blog.title} was removed`);
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 5000);
+        dispatch(notificationChange(`${blog.title} was removed`, 3));
         setBlogs(blogs.filter((b) => b.id !== blog.id));
       } catch (exception) {
-        setErrorMessage(
-          `Information of ${blog.title} has already been removed from server`
-        );
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 5000);
+        dispatch(notificationChange(`Information of ${blog.title} has already been removed from server`, 3));
         setBlogs(blogs.filter((b) => b.id !== blog.id));
       }
     }
@@ -88,20 +77,12 @@ const App = () => {
     blogService
       .create(blogObject)
       .then((returnedBlog) => {
-        setErrorMessage(
-          `a new blog ${blogObject.title} by ${blogObject.author} was added`
-        );
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 5000);
+        dispatch(notificationChange(`a new blog ${blogObject.title} by ${blogObject.author} was added`, 3));
         returnedBlog.user = user;
         setBlogs(blogs.concat(returnedBlog));
       })
       .catch(() => {
-        setErrorMessage("wrong format, please fill all compulsory data");
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 5000);
+        dispatch(notificationChange("wrong format, please fill all compulsory data", 3));
       });
   };
 
@@ -141,7 +122,7 @@ const App = () => {
     return (
       <div>
         <h2>Log in to application</h2>
-        <Notification message={errorMessage} />
+        <Notification  />
         {loginForm()}
       </div>
     );
@@ -149,7 +130,7 @@ const App = () => {
 
   return (
     <div>
-      <Notification message={errorMessage} />
+      <Notification  />
       <h2>blogs</h2>
       <div>
         <p>
