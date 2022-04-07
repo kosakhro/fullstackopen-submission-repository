@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-const Blog = ({ blog, updateBlog, handleRemove, user }) => {
-  const [blogView, setBlogView] = useState(false);
-
-  const handleLike = (blog) => {
-    const newBlog = {
-      title: blog.title,
-      url: blog.url,
-      likes: blog.likes + 1,
-      author: blog.author,
-      user: blog.user,
-      id: blog.id,
-    };
-    updateBlog(newBlog);
+import { delBlog, upBlog } from "../reducers/blogReducer";
+import blogService from "../services/blogs";
+import { useSelector,useDispatch } from "react-redux";
+import { notificationChange } from "../reducers/notificationReducer";
+const Blog = ({ blog,showButton }) => {
+  const [showInfo, setShow] = useState(false);
+  const user= useSelector(state => state.user);
+  const dispatch=useDispatch();
+  const deleteHandler = async () => {
+    if (window.confirm(`Dor you want to delete ${blog.title}?`)) {
+      try {
+        await blogService.deleteBlog(blog.id, user.token);
+        dispatch(delBlog(blog));
+        dispatch(notificationChange(` ${blog.title} deleted`,3));
+      } catch (e) {
+        console.log(e);
+      }
+    }
   };
 
   const blogStyle = {
@@ -19,44 +24,56 @@ const Blog = ({ blog, updateBlog, handleRemove, user }) => {
     paddingLeft: 2,
     border: "solid",
     borderWidth: 1,
-    marginBottom: 5,
+    marginBottom: 5
   };
 
-  if (blogView === false) {
+  if (showInfo) {
     return (
-      <div style={blogStyle}>
-        {blog.title} {blog.author}{" "}
-        <button onClick={() => setBlogView(true)}> view</button>
-      </div>
-    );
-  }
-  /*console.log('blog user name: ', blog.user.name)
-  console.log('user name: ', user.name)
-  console.log('user: ', user)
-  console.log('blog user : ', blog.user)*/
-  if (blog.user.name === user.name) {
-    return (
-      <div style={blogStyle}>
-        {blog.title} {blog.author}{" "}
-        <button onClick={() => setBlogView(false)}> hide</button> <br />
-        {blog.url} <br />
-        {blog.likes} <button onClick={() => handleLike(blog)}> like</button>{" "}
+      <div className='blog' style={blogStyle}>
+        {blog.title}
+        <button
+          onClick={() => {
+            setShow(!showInfo);
+          }}
+        >
+          hide
+        </button>
         <br />
-        {blog.user.name} <br />
-        <button onClick={() => handleRemove(blog)}> remove</button>
+        {blog.url}
+        <br />
+        {blog.likes}{" "}
+        <button
+          onClick={() => {
+            const upLikes=blog;
+            upLikes.likes=blog.likes+1;
+            dispatch(upBlog(upLikes,user.token));
+          }}
+        >
+          like
+        </button>
+        <br />
+        {blog.author}
+        <br />
+        {showButton ? (
+          <button onClick={deleteHandler}>remove</button>
+        ) : (
+          <></>
+        )}
+      </div>
+    );
+  } else {
+    return (
+      <div className='blog' style={blogStyle}>
+        {blog.title} {blog.author}{" "}
+        <button
+          onClick={() => {
+            setShow(!showInfo);
+          }}
+        >
+          view
+        </button>
       </div>
     );
   }
-  return (
-    <div style={blogStyle}>
-      {blog.title} {blog.author}{" "}
-      <button onClick={() => setBlogView(false)}> hide</button> <br />
-      {blog.url} <br />
-      {blog.likes} <button onClick={() => handleLike(blog)}> like</button>{" "}
-      <br />
-      {blog.user.name}
-    </div>
-  );
 };
-
 export default Blog;

@@ -1,72 +1,76 @@
 import React, { useState } from "react";
+import { createBlog } from "../reducers/blogReducer";
+import { useDispatch,useSelector } from "react-redux";
+import { Form, Button } from "react-bootstrap";
 
-const BlogForm = ({ createBlog }) => {
-  const [newBlog, setNewBlog] = useState("");
-  const [newAuthor, setNewAuthor] = useState("");
-  const [newUrl, setNewUrl] = useState("");
-
-  const handleBlogChange = (event) => {
-    setNewBlog(event.target.value);
-  };
-
-  const handleAuthorChange = (event) => {
-    setNewAuthor(event.target.value);
-  };
-
-  const handleUrlChange = (event) => {
-    setNewUrl(event.target.value);
-  };
-
-  const addBlog = (event) => {
+const BlogForm=() => {
+  const [title,setTitle]=useState("");
+  const [author,setAuthor]=useState("");
+  const [url,setUrl]=useState("");
+  const dispatch = useDispatch();
+  const user=useSelector(state => state.user);
+  const callTheFunction=(event) => {
     event.preventDefault();
-    createBlog({
-      title: newBlog,
-      author: newAuthor,
-      url: newUrl,
-    });
-    setNewBlog("");
-    setNewAuthor("");
-    setNewUrl("");
+    dispatch(createBlog({
+      title:title,
+      author:author,
+      url:url
+    },user.token));
+    setTitle("");
+    setAuthor("");
+    setUrl("");
   };
 
-  return (
-    <div>
-      <h2>create new</h2>
+  <Form onSubmit={callTheFunction}>
+    <Form.Group>
+      <Form.Label>username:</Form.Label>
+      <Form.Control
+        type="text"
+        name="username"
+      />
+      <Form.Label>password:</Form.Label>
+      <Form.Control
+        type="password"
+      />
+      <Button variant="primary" type="submit">
+      login
+      </Button>
+    </Form.Group>
+  </Form>;
 
-      <form onSubmit={addBlog}>
+  return <div>
+    <Form onSubmit={callTheFunction}>
+      <Form.Group>
         <div>
-          <label htmlFor="Title">Title:</label>
-          <input
-            id="title"
-            value={newBlog}
-            onChange={handleBlogChange}
-            name="Title"
+          <Form.Label>title:</Form.Label>
+          <Form.Control
+            type="text"
+            value={title}
+            id="Title"
+            onChange={({ target }) => setTitle(target.value)}
           />
         </div>
         <div>
-          <label htmlFor="Author">Author:</label>
-          <input
-            id="author"
-            value={newAuthor}
-            onChange={handleAuthorChange}
-            name="Author"
+          <Form.Label>author:</Form.Label>
+          <Form.Control
+            type="text"
+            value={author}
+            id="Author"
+            onChange={({ target }) => setAuthor(target.value)}
           />
         </div>
         <div>
-          <label htmlFor="Url">Url:</label>
-          <input
-            id="url"
-            value={newUrl}
-            onChange={handleUrlChange}
-            name="Url"
+          <Form.Label>url:</Form.Label>
+          <Form.Control
+            type="text"
+            value={url}
+            id="Url"
+            onChange={({ target }) => setUrl(target.value)}
           />
         </div>
-        <button id="create-button" type="submit">
-          create
-        </button>
-      </form>
-    </div>
-  );
+        <Button variant="primary" type="submit">create</Button>
+      </Form.Group>
+    </Form>
+  </div>;
 };
-
 export default BlogForm;
